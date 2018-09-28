@@ -1,3 +1,3 @@
-module fr.umlv.javainside.labOne{ 
+module fr.umlv.javainside.labOne{
 
 }
