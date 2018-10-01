@@ -8,7 +8,7 @@ env:
    - PRO_SPECIAL_BUILD='early-access'
 
 install:
-  - cd lab01
+  - cd labone
   - java pro_wrapper.java version
 
 script:
