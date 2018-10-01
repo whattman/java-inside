@@ -6,8 +6,7 @@ before_install:
   - unset _JAVA_OPTIONS
 
 install:
-  env: 
-    - PRO_SPECIAL_BUILD='early-access'
+  - env: PRO_SPECIAL_BUILD='early-access'
   - cd lab01
   - java pro_wrapper.java version
 
