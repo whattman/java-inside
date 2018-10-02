@@ -2,7 +2,7 @@ import static com.github.forax.pro.Pro.*;
 import static com.github.forax.pro.builder.Builders.*;
 
 resolver.
-    checkForUpdate(true).
+    //checkForUpdate(true).
     dependencies(
         // JUnit 5
         "org.junit.jupiter.api=org.junit.jupiter:junit-jupiter-api:5.2.0",
