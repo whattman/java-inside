@@ -2,15 +2,11 @@ language: java
 jdk: openjdk11
 
 matrix:
-  include:
+  includes:
 	- name: "labone test"
-	  env: 
-		- FOLDER=labone
-		- PRO_SPECIAL_BUILD=''
+	  env: FOLDER=labone
 	- name: "labtwo test"
-	  env:
-		- FOLDER=labtwo
-		- PRO_SPECIAL_BUILD=''		
+	  env: FOLDER=labtwo	
 	  
 # https://github.com/travis-ci/travis-ci/issues/8408
 before_install:
