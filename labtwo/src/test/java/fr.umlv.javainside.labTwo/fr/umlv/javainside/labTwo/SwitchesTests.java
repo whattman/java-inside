@@ -2,14 +2,14 @@ package fr.umlv.javainside.labTwo;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.function.IntFunction;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+
+
 
 class SwitchesTests {
 	static class TestData {
