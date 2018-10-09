@@ -4,10 +4,10 @@ jdk: openjdk11
 
 matrix:
   include:
-    - env: FOLDER=labone
-    - env: FOLDER=labtwo
-env: 
-  - PRO_SPECIAL_BUILD='early-access'	
+    - env: FOLDER=labone PRO_SPECIAL_BUILD=''
+    - env: FOLDER=labtwo PRO_SPECIAL_BUILD='early-access'
+    - env: FOLDER=labtwo PRO_SPECIAL_BUILD='early-access-amber'
+
   
 # https://github.com/travis-ci/travis-ci/issues/8408
 before_install:

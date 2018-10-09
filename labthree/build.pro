@@ -8,7 +8,8 @@ resolver.
         "org.junit.jupiter.api=org.junit.jupiter:junit-jupiter-api:5.3.1",
         "org.junit.platform.commons=org.junit.platform:junit-platform-commons:1.3.1",
         "org.apiguardian.api=org.apiguardian:apiguardian-api:1.0.0",
-        "org.opentest4j=org.opentest4j:opentest4j:1.1.1" /*,*/
+        "org.opentest4j=org.opentest4j:opentest4j:1.1.1" ,
+		"org.junit.jupiter.params=org.junit.jupiter:junit-jupiter-params:5.2.0"
 
 //        // JMH
 //        "org.openjdk.jmh=org.openjdk.jmh:jmh-core:1.21",
@@ -28,7 +29,7 @@ docer.
    
 packager.
     modules(
-        "fr.umlv.javainside.labThree@1.0/fr.umlv.javainside.labThree.Main"
+        "fr.umlv.javainside.labthree@1.0/fr.umlv.javainside.labthree.Main"
     )   
     
 run(resolver, modulefixer, compiler, tester, docer, packager, runner /*, perfer */)
