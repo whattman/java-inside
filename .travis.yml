@@ -6,7 +6,8 @@ matrix:
   include:
     - env: FOLDER=labone PRO_SPECIAL_BUILD=''
     - env: FOLDER=labtwo PRO_SPECIAL_BUILD='early-access'
-    - env: FOLDER=labthree PRO_SPECIAL_BUILD='early-access-amber'
+    - env: FOLDER=labthree PRO_SPECIAL_BUILD='early-access'
+    - env: FOLDER=labfour PRO_SPECIAL_BUILD='early-access-loom'
 
   
 # https://github.com/travis-ci/travis-ci/issues/8408
