@@ -22,7 +22,7 @@ class ExprSwitchesTests {
 		int parameter;
 		String expectedReturn;
 		
-		public TestData(IntFunction function,int parameter, String expectedReturn) {
+		public TestData(IntFunction function, int parameter, String expectedReturn) {
 			this.function = function;
 			this.parameter = parameter;
 			this.expectedReturn = expectedReturn;
@@ -67,12 +67,36 @@ class ExprSwitchesTests {
 		assertEquals("a lot", ExprSwitches.enumSwitch(EnumSwitch.INFO));
 		assertEquals("zero", ExprSwitches.enumSwitch(EnumSwitch.ERROR));
 	}
+
+	// Nouveaux switchs
+	
+	@Test
+	void StringSwitchNewtest() {
+		assertEquals("zero", ExprSwitches.exprStringSwitch("foo"));
+		assertEquals("one", ExprSwitches.exprStringSwitch("bar"));
+		assertEquals("a lot", ExprSwitches.exprStringSwitch("baz"));
+		assertEquals("zero", ExprSwitches.exprStringSwitch("viva zorg"));
+	}
+	@Test
+	void StringSwitchNewtestError() {
+		assertThrows(IllegalArgumentException.class, () -> ExprSwitches.StringSwitch("Toto"));
+	}
+	@Test
+	void EnumSwitchNewtest() {
+		assertEquals("zero", ExprSwitches.exprEnumSwitch(EnumSwitch.DEBUG));
+		assertEquals("one", ExprSwitches.exprEnumSwitch(EnumSwitch.WARNING));
+		assertEquals("a lot", ExprSwitches.exprEnumSwitch(EnumSwitch.INFO));
+		assertEquals("zero", ExprSwitches.exprEnumSwitch(EnumSwitch.ERROR));
+	}
+	
+	
+	// Methodes providers
 	static Stream<TestData> testDataProvider() {
-	    List<TestData> lst = List.of(new TestData(ExprSwitches::intSwitch, 0, "zero"), new TestData(ExprSwitches::intSwitch, 3, "zero"), new TestData(ExprSwitches::intSwitch2, 3, "zero"),new TestData(ExprSwitches::intSwitch, 1, "one"), new TestData(ExprSwitches::intSwitch, 2, "a lot"), new TestData(ExprSwitches::intSwitch2, 0, "zero"), new TestData(ExprSwitches::intSwitch2, 10, "one"), new TestData(ExprSwitches::intSwitch2, 100, "a lot"));
+	    List<TestData> lst = List.of(new TestData(ExprSwitches::intSwitch, 0, "zero"), new TestData(ExprSwitches::intSwitch, 3, "zero"), new TestData(ExprSwitches::intSwitch2, 3, "zero"),new TestData(ExprSwitches::intSwitch, 1, "one"), new TestData(ExprSwitches::intSwitch, 2, "a lot"), new TestData(ExprSwitches::intSwitch2, 0, "zero"), new TestData(ExprSwitches::intSwitch2, 10, "one"), new TestData(ExprSwitches::intSwitch2, 100, "a lot"), new TestData(ExprSwitches::exprIntSwitch, 0, "zero"), new TestData(ExprSwitches::exprIntSwitch, 3, "zero"), new TestData(ExprSwitches::exprIntSwitch2, 3, "zero"),new TestData(ExprSwitches::exprIntSwitch, 1, "one"), new TestData(ExprSwitches::exprIntSwitch, 2, "a lot"), new TestData(ExprSwitches::exprIntSwitch2, 0, "zero"), new TestData(ExprSwitches::exprIntSwitch2, 10, "one"), new TestData(ExprSwitches::exprIntSwitch2, 100, "a lot"));
 	    return lst.stream();
 	}
 	static Stream<IntFunction> getIntFunction() {
-		List<IntFunction> lst = List.of(ExprSwitches::intSwitch, ExprSwitches::intSwitch2);
+		List<IntFunction> lst = List.of(ExprSwitches::intSwitch, ExprSwitches::intSwitch2, ExprSwitches::exprIntSwitch, ExprSwitches::exprIntSwitch2);
 		return lst.stream();
 	}
 }

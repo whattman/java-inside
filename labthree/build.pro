@@ -2,11 +2,11 @@ import static com.github.forax.pro.Pro.*;
 import static com.github.forax.pro.builder.Builders.*;
 
 resolver.
-    checkForUpdate(true).
+    //checkForUpdate(true).
     dependencies(
         // JUnit 5
-        "org.junit.jupiter.api=org.junit.jupiter:junit-jupiter-api:5.3.1",
-        "org.junit.platform.commons=org.junit.platform:junit-platform-commons:1.3.1",
+        "org.junit.jupiter.api=org.junit.jupiter:junit-jupiter-api:5.2.0",
+        "org.junit.platform.commons=org.junit.platform:junit-platform-commons:1.2.0",
         "org.apiguardian.api=org.apiguardian:apiguardian-api:1.0.0",
         "org.opentest4j=org.opentest4j:opentest4j:1.1.1" ,
 		"org.junit.jupiter.params=org.junit.jupiter:junit-jupiter-params:5.2.0"
@@ -18,10 +18,9 @@ resolver.
 //        "org.openjdk.jmh.generator=org.openjdk.jmh:jmh-generator-annprocess:1.21"
     )
 
-// compiler.
-//     rawArguments(
-//         "--processor-module-path", "deps"   // enable JMH annotation processor
-//     )
+ compiler.
+        sourceRelease(12).
+        rawArguments("--enable-preview")
 
 docer.
     quiet(true).
@@ -31,7 +30,8 @@ packager.
     modules(
         "fr.umlv.javainside.labthree@1.0/fr.umlv.javainside.labthree.Main"
     )   
-    
-run(resolver, modulefixer, compiler, tester, docer, packager, runner /*, perfer */)
+runner.
+        rawArguments("--enable-preview") 
+run(resolver, modulefixer, compiler, tester, /*docer, */packager, runner /*, perfer */)
 
 /exit

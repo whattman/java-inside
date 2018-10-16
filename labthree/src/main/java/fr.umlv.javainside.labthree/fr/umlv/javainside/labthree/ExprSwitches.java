@@ -42,4 +42,37 @@ public class ExprSwitches {
 		}
 	}
 	
+	public static String exprIntSwitch(int nombre) {
+		return switch(nombre) {
+			case 3, 0 -> "zero";
+			case 1 -> "one";
+			case 2 -> "a lot";
+			default -> throw new IllegalArgumentException("number should be 0, 1 or 2. Having : " + nombre);
+		};
+	}
+	public static String exprIntSwitch2(int nombre) {
+		return switch(nombre) {
+			case 3, 0 -> "zero";
+			case 10 -> "one";
+			case 100 -> "a lot";
+			default -> throw new IllegalArgumentException("number should be 0, 1 or 2. Having : " + nombre);
+		};
+	}
+	public static String exprStringSwitch(String index) {	
+		return switch(index) {
+			case "viva zorg", "foo" -> "zero";
+			case "bar" -> "one";
+			case "baz" -> "a lot";
+			default -> throw new IllegalArgumentException("number should be foo, bar, baz or viva zorg. Having : " + index);
+		};
+	}
+	public static String exprEnumSwitch(EnumSwitch e) {
+		return switch(e) {
+			case ERROR, DEBUG -> "zero";
+			case WARNING -> "one";
+			case INFO -> "a lot";
+			default -> throw new IllegalArgumentException("number should be foo, bar, baz or viva zorg. Having : " + e);
+		};
+	}
+	
 }
