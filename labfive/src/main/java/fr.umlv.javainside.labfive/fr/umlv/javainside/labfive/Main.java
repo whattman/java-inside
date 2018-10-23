@@ -1,11 +1,11 @@
 package fr.umlv.javainside.labfive;
 
+import static java.util.stream.Collectors.joining;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.util.Arrays;
-import java.util.stream.Collectors;
-
 
 public class Main {
 	
@@ -29,13 +29,17 @@ public class Main {
 		}
 	}
 	private static String getmethodNameOrAlternativeName(Method m) {
-		return (m.getAnnotation(JSONProperty.class).alterativeName().equals("") ? Main.propertyName(m.getName()) : m.getAnnotation(JSONProperty.class).alterativeName());
+		var alterativeName = m.getAnnotation(JSONProperty.class).alterativeName();
+		return alterativeName.equals("") ? propertyName(m.getName()) : alterativeName;
 	}
 	public static String toJSON(Object obj) {
 		return Arrays.stream(obj.getClass().getMethods())
-		    .filter(e -> e.getName().startsWith("get") && e.getParameterCount() == 0 && e.isAnnotationPresent(JSONProperty.class))
-			.map(e -> "\t\"" + Main.getmethodNameOrAlternativeName(e) + "\": \"" + Main.doInvoke(e, obj) + "\"")
-			.collect(Collectors.joining(",\n", "{\n", "\n}"));
+		    .filter(method -> method.isAnnotationPresent(JSONProperty.class))
+			.map(method -> formatJSONLine(obj, method))
+			.collect(joining(",\n", "{\n", "\n}"));
+	}
+	private static String formatJSONLine(Object obj, Method method) {
+		return "\t\"" + getmethodNameOrAlternativeName(method) + "\": \"" + doInvoke(method, obj) + "\"";
 	}
 	
 	public static void main(String[] args) {
