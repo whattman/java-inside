@@ -4,26 +4,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.stream.Collectors;
 
 
 public class Main {
-//	public static String toJSON(Person person) {
-//	    return
-//	        "{\n" +
-//	        "  \"firstName\": \"" + person.getFirstName() + "\"\n" +
-//	        "  \"lastName\": \"" + person.getLastName() + "\"\n" +
-//	        "}\n";
-//	}
-//
-//	public static String toJSON(Alien alien) {
-//		return 
-//	        "{\n" + 
-//	        "  \"planet\": \"" + alien.getPlanet() + "\"\n" + 
-//	        "  \"members\": \"" + alien.getAge() + "\"\n" + 
-//	        "}\n";
-//	}
 	
 	private static String propertyName(String name) {
 		return Character.toLowerCase(name.charAt(3)) + name.substring(4);
@@ -39,17 +23,18 @@ public class Main {
 			if (cause instanceof Exception) {
 				throw new UndeclaredThrowableException(cause);
 			}	
-			else {
-				throw (Error)cause; 
-			}
+			throw (Error)cause; 
 		} catch (IllegalAccessException e) {
 			throw new AssertionError(e);
 		}
 	}
+	private static String getmethodNameOrAlternativeName(Method m) {
+		return (m.getAnnotation(JSONProperty.class).alterativeName().equals("") ? Main.propertyName(m.getName()) : m.getAnnotation(JSONProperty.class).alterativeName());
+	}
 	public static String toJSON(Object obj) {
 		return Arrays.stream(obj.getClass().getMethods())
-		    .filter(e -> e.getName().startsWith("get"))
-			.map(e -> "\t\"" + Main.propertyName(e.getName()) + "\": \"" + Main.doInvoke(e, obj) + "\"")
+		    .filter(e -> e.getName().startsWith("get") && e.getParameterCount() == 0 && e.isAnnotationPresent(JSONProperty.class))
+			.map(e -> "\t\"" + Main.getmethodNameOrAlternativeName(e) + "\": \"" + Main.doInvoke(e, obj) + "\"")
 			.collect(Collectors.joining(",\n", "{\n", "\n}"));
 	}
 	

@@ -13,11 +13,11 @@ public class Alien {
 	    this.planet = Objects.requireNonNull(planet);
 	    this.age = age;
 	}
-	
+	@JSONProperty
 	public String getPlanet() {
 		return planet;
 	}
-	
+	@JSONProperty
 	public int getAge() {
 		return age;
 	}
