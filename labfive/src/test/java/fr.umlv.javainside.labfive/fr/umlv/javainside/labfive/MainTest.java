@@ -11,8 +11,7 @@ class MainTest {
 		var person = new Person("John", "Doe");
 		assertEquals("{\n" + 
 				"	\"firstName\": \"John\",\n" + 
-				"	\"lastName\": \"Doe\",\n" + 
-				"	\"class\": \"class fr.umlv.javainside.labfive.Person\"\n" + 
+				"	\"lastName\": \"Doe\"\n" + 
 				"}", Main.toJSON(person));
 	}
 	
@@ -21,8 +20,7 @@ class MainTest {
 		var alien = new Alien("terre", 333);
 		assertEquals("{\n" + 
 				"	\"planet\": \"terre\",\n" + 
-				"	\"age\": \"333\",\n" + 
-				"	\"class\": \"class fr.umlv.javainside.labfive.Alien\"\n" + 
+				"	\"age\": \"333\"\n" + 
 				"}", Main.toJSON(alien));
 	}
 
