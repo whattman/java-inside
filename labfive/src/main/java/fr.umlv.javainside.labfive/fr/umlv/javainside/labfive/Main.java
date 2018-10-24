@@ -8,7 +8,12 @@ import java.lang.reflect.UndeclaredThrowableException;
 import java.util.Arrays;
 
 public class Main {
-	
+	private static ClassValue<Method[]> cache = new ClassValue<Method[]>() {
+		@Override
+		protected Method[] computeValue(Class<?> arg0) {
+			return arg0.getMethods();
+		}
+	};
 	private static String propertyName(String name) {
 		return Character.toLowerCase(name.charAt(3)) + name.substring(4);
     }
@@ -33,7 +38,7 @@ public class Main {
 		return alterativeName.equals("") ? propertyName(m.getName()) : alterativeName;
 	}
 	public static String toJSON(Object obj) {
-		return Arrays.stream(obj.getClass().getMethods())
+		return Arrays.stream(cache.get(obj.getClass()))
 		    .filter(method -> method.isAnnotationPresent(JSONProperty.class))
 			.map(method -> formatJSONLine(obj, method))
 			.collect(joining(",\n", "{\n", "\n}"));
